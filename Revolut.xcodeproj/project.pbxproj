@@ -24,9 +24,12 @@
 		F32C904421EBCFB20071D424 /* URLRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C904321EBCFB20071D424 /* URLRouter.swift */; };
 		F32C904621EBD07A0071D424 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C904521EBD07A0071D424 /* NetworkingManager.swift */; };
 		F32C904921EBD25B0071D424 /* RatesURLRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C904821EBD25B0071D424 /* RatesURLRouter.swift */; };
-		F32C904B21EBD6510071D424 /* JSONable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C904A21EBD6510071D424 /* JSONable.swift */; };
 		F32C904D21EBD9890071D424 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C904C21EBD9890071D424 /* CustomError.swift */; };
 		F32C905621ED281A0071D424 /* CellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C905521ED281A0071D424 /* CellConfigurator.swift */; };
+		F32C906321EFB8F10071D424 /* UIEdgeInsets+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C906221EFB8F10071D424 /* UIEdgeInsets+Extensions.swift */; };
+		F32C906621EFB9520071D424 /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C906521EFB9520071D424 /* Loadable.swift */; };
+		F32C906E21EFBB800071D424 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C906D21EFBB800071D424 /* ErrorManager.swift */; };
+		F32C907021EFD1940071D424 /* Double+Rate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C906F21EFD1940071D424 /* Double+Rate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,9 +68,12 @@
 		F32C904321EBCFB20071D424 /* URLRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRouter.swift; sourceTree = "<group>"; };
 		F32C904521EBD07A0071D424 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		F32C904821EBD25B0071D424 /* RatesURLRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesURLRouter.swift; sourceTree = "<group>"; };
-		F32C904A21EBD6510071D424 /* JSONable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONable.swift; sourceTree = "<group>"; };
 		F32C904C21EBD9890071D424 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		F32C905521ED281A0071D424 /* CellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellConfigurator.swift; sourceTree = "<group>"; };
+		F32C906221EFB8F10071D424 /* UIEdgeInsets+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Extensions.swift"; sourceTree = "<group>"; };
+		F32C906521EFB9520071D424 /* Loadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
+		F32C906D21EFBB800071D424 /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
+		F32C906F21EFD1940071D424 /* Double+Rate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Rate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +139,9 @@
 		F32C900321EA3D240071D424 /* Revolut */ = {
 			isa = PBXGroup;
 			children = (
+				F32C906121EFB8D80071D424 /* Extensions */,
+				F32C906421EFB9450071D424 /* Loadable */,
+				F32C906C21EFBAB10071D424 /* ErrorManager */,
 				F32C904021EBC9B90071D424 /* Networking */,
 				F32C902A21EA4AD40071D424 /* TableViewController */,
 				F32C902521EA41C80071D424 /* RateList */,
@@ -190,7 +199,6 @@
 				F32C904121EBC9CC0071D424 /* Result.swift */,
 				F32C904321EBCFB20071D424 /* URLRouter.swift */,
 				F32C904521EBD07A0071D424 /* NetworkingManager.swift */,
-				F32C904A21EBD6510071D424 /* JSONable.swift */,
 				F32C904C21EBD9890071D424 /* CustomError.swift */,
 			);
 			path = Networking;
@@ -202,6 +210,31 @@
 				F32C904821EBD25B0071D424 /* RatesURLRouter.swift */,
 			);
 			path = Routers;
+			sourceTree = "<group>";
+		};
+		F32C906121EFB8D80071D424 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F32C906221EFB8F10071D424 /* UIEdgeInsets+Extensions.swift */,
+				F32C906F21EFD1940071D424 /* Double+Rate.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F32C906421EFB9450071D424 /* Loadable */ = {
+			isa = PBXGroup;
+			children = (
+				F32C906521EFB9520071D424 /* Loadable.swift */,
+			);
+			path = Loadable;
+			sourceTree = "<group>";
+		};
+		F32C906C21EFBAB10071D424 /* ErrorManager */ = {
+			isa = PBXGroup;
+			children = (
+				F32C906D21EFBB800071D424 /* ErrorManager.swift */,
+			);
+			path = ErrorManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -383,11 +416,13 @@
 			files = (
 				F32C903721EBBE8A0071D424 /* TableViewController.swift in Sources */,
 				F32C904D21EBD9890071D424 /* CustomError.swift in Sources */,
+				F32C906E21EFBB800071D424 /* ErrorManager.swift in Sources */,
+				F32C906321EFB8F10071D424 /* UIEdgeInsets+Extensions.swift in Sources */,
+				F32C907021EFD1940071D424 /* Double+Rate.swift in Sources */,
 				F32C904921EBD25B0071D424 /* RatesURLRouter.swift in Sources */,
 				F32C905621ED281A0071D424 /* CellConfigurator.swift in Sources */,
 				F32C903921EBBFE00071D424 /* TableViewModel.swift in Sources */,
 				F32C900721EA3D240071D424 /* RatesListViewController.swift in Sources */,
-				F32C904B21EBD6510071D424 /* JSONable.swift in Sources */,
 				F32C900521EA3D240071D424 /* AppDelegate.swift in Sources */,
 				F32C904421EBCFB20071D424 /* URLRouter.swift in Sources */,
 				F32C903F21EBC6AE0071D424 /* Rate.swift in Sources */,
@@ -395,6 +430,7 @@
 				F32C903521EA63530071D424 /* RateCell.swift in Sources */,
 				F32C902921EA423C0071D424 /* RatesListViewModel.swift in Sources */,
 				F32C904221EBC9CC0071D424 /* Result.swift in Sources */,
+				F32C906621EFB9520071D424 /* Loadable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

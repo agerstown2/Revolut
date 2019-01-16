@@ -9,7 +9,7 @@
 import UIKit
 
 final class TableViewController: NSObject {
-	private var configurators: [String: CellConfigurator] = [:]
+	private var configurators: [String: GeneralCellConfigurator] = [:]
 	private var model: TableViewModel
 
 	let tableView = UITableView(frame: .zero, style: .plain)
@@ -19,20 +19,21 @@ final class TableViewController: NSObject {
 
 		super.init()
 
+		tableView.separatorStyle = .none
 		tableView.dataSource = self
 	}
 }
 
 // MARL: - Cell configurators registration
 extension TableViewController {
-	func register<Cell: UITableViewCell, Item>(configurator: GenericCellConfigurator<Cell, Item>) {
+	func register<Cell: UITableViewCell, Item>(configurator: CellConfigurator<Cell, Item>) {
 		registerConfigurator(configurator: configurator)
 		registerCellClass(cellClass: Cell.self)
 	}
 
-	private func registerConfigurator<Cell, Item>(configurator: GenericCellConfigurator<Cell, Item>) {
+	private func registerConfigurator<Cell, Item>(configurator: CellConfigurator<Cell, Item>) {
 		let itemType = String(describing: Item.self)
-		configurators[itemType] = CellConfigurator(
+		configurators[itemType] = GeneralCellConfigurator(
 			configureCell: { cell, item in
 				guard let cell = cell as? Cell, let item = item as? Item else { return }
 				configurator.configureCell(cell, item)
@@ -74,5 +75,17 @@ extension TableViewController: UITableViewDataSource {
 		configurator.configureCell(cell, cellViewModel)
 
 		return cell
+	}
+}
+
+fileprivate final class GeneralCellConfigurator {
+	let configureCell: (UITableViewCell, Any) -> Void
+	let didSelect: (Any) -> Void
+	let reuseIdentifier: String
+
+	init(configureCell: @escaping (UITableViewCell, Any) -> Void, didSelect: @escaping (Any) -> Void, reuseIdentifier: String) {
+		self.configureCell = configureCell
+		self.didSelect = didSelect
+		self.reuseIdentifier = reuseIdentifier
 	}
 }

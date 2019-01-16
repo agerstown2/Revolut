@@ -24,7 +24,10 @@ final class RateCell: UITableViewCell {
 	}
 
 	private func setupViews() {
+		codeLabel.font = .systemFont(ofSize: 24)
+		codeLabel.textColor = UIColor.blue.withAlphaComponent(0.7)
 
+		rateTextField.font = .systemFont(ofSize: 32)
 	}
 
 	private func layoutViews() {
@@ -34,23 +37,40 @@ final class RateCell: UITableViewCell {
 
 		contentView.addSubview(rateTextField)
 		rateTextField.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
-		rateTextField.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 16), excludingEdge: .leading)
+		rateTextField.autoPinEdge(toSuperviewEdge: .top, withInset: 16)
 		rateTextField.autoPinEdge(.leading, to: .trailing, of: codeLabel, withOffset: 16, relation: .greaterThanOrEqual)
+
+		let underlineView = UIView()
+		underlineView.backgroundColor = UIColor.gray.withAlphaComponent(0.3)
+		let underlineHeight: CGFloat = 4
+		underlineView.autoSetDimension(.height, toSize: underlineHeight)
+		underlineView.layer.cornerRadius = underlineHeight / 2
+		contentView.addSubview(underlineView)
+		underlineView.autoMatch(.width, to: .width, of: rateTextField, withOffset: 8)
+		underlineView.autoAlignAxis(.vertical, toSameAxisOf: rateTextField)
+		underlineView.autoPinEdge(toSuperviewEdge: .bottom)
+		underlineView.autoPinEdge(.top, to: .bottom, of: rateTextField, withOffset: 4)
 	}
 
-	private func configure(rate: Rate) {
-		codeLabel.text = rate.code
-		rateTextField.text = "\(rate.index)"
+	private func configure(model: RateCellViewModel) {
+		codeLabel.text = model.rate.code
+		let value = model.rate.index * model.amount
+		rateTextField.text = value.rateFormatted()
 	}
 }
 
 extension RateCell {
-	static var configurator: GenericCellConfigurator<RateCell, Rate> {
-		return GenericCellConfigurator(
-			configureCell: { cell, rate in
-				cell.configure(rate: rate)
+	static var configurator: CellConfigurator<RateCell, RateCellViewModel> {
+		return CellConfigurator(
+			configureCell: { cell, model in
+				cell.configure(model: model)
 			},
 			didSelect: { _ in }
 		)
 	}
+}
+
+struct RateCellViewModel {
+	let rate: Rate
+	let amount: Double
 }

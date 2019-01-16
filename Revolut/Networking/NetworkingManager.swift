@@ -14,7 +14,14 @@ final class NetworkingManager {
 	static let shared = NetworkingManager()
 
 	func request(router: URLRouter, completion: @escaping (_ response: DataResponse<Any>) -> Void) {
-		Alamofire.request(router, method: router.method, parameters: router.args, encoding: URLEncoding.default, headers: router.headers).responseJSON(completionHandler: completion)
+		Alamofire.request(
+			router,
+			method: router.method,
+			parameters: router.args,
+			encoding: URLEncoding.default,
+			headers: router.headers
+		)
+		.responseJSON(completionHandler: completion)
 	}
 }
 

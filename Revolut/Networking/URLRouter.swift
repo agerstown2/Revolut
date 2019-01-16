@@ -31,6 +31,6 @@ extension URLRouter {
 
 extension URLRouter {
 	func asURL() throws -> URL {
-		return try ("https://revolut.duckdns.org/" + path).asURL() //try "https://revolut.duckdns.org".asURL().appendingPathComponent(path)
+		return try ("https://revolut.duckdns.org/" + path).asURL()
 	}
 }

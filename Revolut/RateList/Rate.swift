@@ -17,4 +17,9 @@ struct Rate {
 		self.code = code
 		self.index = index
 	}
+
+	init(code: String, index: Double) {
+		self.code = code
+		self.index = index
+	}
 }

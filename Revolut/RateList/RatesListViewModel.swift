@@ -9,8 +9,10 @@
 import Foundation
 
 final class RatesListViewModel {
-	private var baseCode: String = "EUR"
-	private(set) var rates: [Rate] = []
+	private(set) var rates: [RateCellViewModel] = []
+
+	var baseCode: String = "EUR"
+	var amount: Double = 100
 
 	func loadRates(completion: @escaping (_ result: Result) -> ()) {
 		NetworkingManager.shared.request(router: RatesURLRouter(baseCode: baseCode)) { response in
@@ -20,7 +22,12 @@ final class RatesListViewModel {
 				if ratesJSON.isEmpty {
 					completion(.error(CustomError(description: "No rates")))
 				} else {
-					self.rates = ratesJSON.compactMap { rate in Rate(code: rate.key, index: rate.value) }
+					let baseRate = RateCellViewModel(rate: Rate(code: self.baseCode, index: 1), amount: self.amount)
+					let convertedRates: [RateCellViewModel] = ratesJSON.compactMap { rateJSON in
+						let rate = Rate(code: rateJSON.key, index: rateJSON.value)
+						return rate.map { RateCellViewModel(rate: $0, amount: self.amount) }
+					}
+					self.rates = [baseRate] + convertedRates
 					completion(.success)
 				}
 			case .error(let error):
