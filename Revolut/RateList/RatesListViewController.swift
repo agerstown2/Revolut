@@ -57,4 +57,3 @@ final class RatesListViewController: UIViewController, Loadable {
 		}
 	}
 }
-

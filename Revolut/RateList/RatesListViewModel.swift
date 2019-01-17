@@ -14,6 +14,8 @@ final class RatesListViewModel {
 	var baseCode: String = "EUR"
 	var amount: Double = 100
 
+	var delegate: TableViewModelDelegate?
+
 	func loadRates(completion: @escaping (_ result: Result) -> ()) {
 		NetworkingManager.shared.request(router: RatesURLRouter(baseCode: baseCode)) { response in
 			switch response.jsonData {
@@ -35,6 +37,10 @@ final class RatesListViewModel {
 			}
 		}
 	}
+
+	private func updateRates() {
+		rates = rates.map { RateCellViewModel(rate: $0.rate, amount: self.amount) }
+	}
 }
 
 extension RatesListViewModel: TableViewModel {
@@ -44,5 +50,22 @@ extension RatesListViewModel: TableViewModel {
 
 	func viewModelAt(indexPath: IndexPath) -> Any {
 		return rates[indexPath.row]
+	}
+}
+
+extension RatesListViewModel: RateCellDelegate {
+	func amountChanged(_ amount: Double) {
+		self.amount = amount
+		updateRates()
+		
+		delegate?.setNeedsReload(indexPaths: Array(1..<rates.count).map { IndexPath(row: $0, section: 0) })
+	}
+
+	func cellSelected(indexPath: IndexPath) {
+		let selectedRate = rates[indexPath.row]
+		rates.remove(at: indexPath.row)
+		rates.insert(selectedRate, at: 0)
+
+		delegate?.move(at: indexPath, to: IndexPath(row: 0, section: 0))
 	}
 }

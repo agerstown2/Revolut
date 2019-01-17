@@ -8,12 +8,12 @@
 
 import UIKit
 
-final class CellConfigurator<Cell: UITableViewCell, Item> {
-	let configureCell: (Cell, Item) -> Void
-	let didSelect: (Item) -> Void
+final class CellConfigurator<Cell: UITableViewCell, Item, TableModel: TableViewModel> {
+	let configureCell: (Cell, Item, TableModel) -> Void
+	let didSelect: (Cell, IndexPath) -> Void
 	let reuseIdentifier: String
 
-	init(configureCell: @escaping (Cell, Item) -> Void, didSelect: @escaping (Item) -> Void) {
+	init(configureCell: @escaping (Cell, Item, TableModel) -> Void, didSelect: @escaping (Cell, IndexPath) -> Void) {
 		self.configureCell = configureCell
 		self.didSelect = didSelect
 		self.reuseIdentifier = String(describing: Cell.self)

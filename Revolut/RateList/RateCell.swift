@@ -12,6 +12,8 @@ final class RateCell: UITableViewCell {
 	private let codeLabel = UILabel()
 	private let rateTextField = UITextField()
 
+	var delegate: RateCellDelegate?
+
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -27,7 +29,9 @@ final class RateCell: UITableViewCell {
 		codeLabel.font = .systemFont(ofSize: 24)
 		codeLabel.textColor = UIColor.blue.withAlphaComponent(0.7)
 
-		rateTextField.font = .systemFont(ofSize: 32)
+		rateTextField.font = .systemFont(ofSize: 30)
+		rateTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+		rateTextField.delegate = self
 	}
 
 	private func layoutViews() {
@@ -57,20 +61,48 @@ final class RateCell: UITableViewCell {
 		let value = model.rate.index * model.amount
 		rateTextField.text = value.rateFormatted()
 	}
+
+	@objc private func textFieldDidChange() {
+		guard let text = rateTextField.text, let amount = Double(text) else { return }
+		delegate?.amountChanged(amount)
+	}
 }
 
+// MARK: - CellConfigurator
 extension RateCell {
-	static var configurator: CellConfigurator<RateCell, RateCellViewModel> {
+	static var configurator: CellConfigurator<RateCell, RateCellViewModel, RatesListViewModel> {
 		return CellConfigurator(
-			configureCell: { cell, model in
+			configureCell: { cell, model, tableViewModel in
 				cell.configure(model: model)
+				cell.rateTextField.isUserInteractionEnabled = false
+				cell.delegate = tableViewModel
 			},
-			didSelect: { _ in }
+			didSelect: { cell, indexPath in
+				cell.rateTextField.isUserInteractionEnabled = true
+				cell.rateTextField.becomeFirstResponder()
+				cell.delegate?.cellSelected(indexPath: indexPath)
+			}
 		)
+	}
+}
+
+// MARK: - UITextFieldDelegate
+extension RateCell: UITextFieldDelegate {
+	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+		return string.isEmpty || textField.text.map { $0.count < 6 } ?? true
+	}
+
+	func textFieldDidEndEditing(_ textField: UITextField) {
+		textField.isUserInteractionEnabled = false
 	}
 }
 
 struct RateCellViewModel {
 	let rate: Rate
 	let amount: Double
+}
+
+protocol RateCellDelegate {
+	func amountChanged(_ amount: Double)
+	func cellSelected(indexPath: IndexPath)
 }

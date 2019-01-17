@@ -12,10 +12,17 @@ protocol TableViewModel {
 	func numberOfSections() -> Int
 	func numberOfItemsIn(section: Int) -> Int
 	func viewModelAt(indexPath: IndexPath) -> Any
+
+	var delegate: TableViewModelDelegate? { get set }
 }
 
 extension TableViewModel {
 	func numberOfSections() -> Int {
 		return 1
 	}
+}
+
+protocol TableViewModelDelegate: class {
+	func setNeedsReload(indexPaths: [IndexPath])
+	func move(at: IndexPath, to: IndexPath)
 }
