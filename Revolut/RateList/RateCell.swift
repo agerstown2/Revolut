@@ -63,7 +63,7 @@ final class RateCell: UITableViewCell {
 	}
 
 	@objc private func textFieldDidChange() {
-		guard let text = rateTextField.text, let amount = Double(text) else { return }
+		let amount = rateTextField.text.map { Double($0) ?? 0 } ?? 0
 		delegate?.amountChanged(amount)
 	}
 }
@@ -89,6 +89,15 @@ extension RateCell {
 // MARK: - UITextFieldDelegate
 extension RateCell: UITextFieldDelegate {
 	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+		if let text = textField.text {
+			if text == "0" && string == "0" {
+				return false
+			}
+
+			if text == "0" && string != "0" {
+				textField.text = ""
+			}
+		}
 		return string.isEmpty || textField.text.map { $0.count < 6 } ?? true
 	}
 
