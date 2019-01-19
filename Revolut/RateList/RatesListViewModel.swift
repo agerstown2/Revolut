@@ -11,20 +11,20 @@ import Foundation
 final class RatesListViewModel {
 	private(set) var rates: [RateCellViewModel] = []
 
-	var baseCode: String = "EUR"
-	var amount: Double = 100
+	var baseRate = Rate(code: "EUR", index: Double(100))
+	var amount: Double = 1
 
 	var delegate: TableViewModelDelegate?
 
 	func loadRates(completion: @escaping (_ result: Result) -> ()) {
-		NetworkingManager.shared.request(router: RatesURLRouter(baseCode: baseCode)) { response in
+		NetworkingManager.shared.request(router: RatesURLRouter(baseCode: baseRate.code)) { response in
 			switch response.jsonData {
 			case .value(let json):
 				let ratesJSON = json["rates"].dictionaryValue
 				if ratesJSON.isEmpty {
 					completion(.error(CustomError(description: "No rates")))
 				} else {
-					let baseRate = RateCellViewModel(rate: Rate(code: self.baseCode, index: 1), amount: self.amount)
+					let baseRate = RateCellViewModel(rate: self.baseRate, amount: self.amount)
 					let convertedRates: [RateCellViewModel] = ratesJSON.compactMap { rateJSON in
 						let rate = Rate(code: rateJSON.key, index: rateJSON.value)
 						return rate.map { RateCellViewModel(rate: $0, amount: self.amount) }
@@ -63,9 +63,29 @@ extension RatesListViewModel: RateCellDelegate {
 
 	func cellSelected(indexPath: IndexPath) {
 		let selectedRate = rates[indexPath.row]
+
+		amount = selectedRate.rate.index * amount
+		baseRate = Rate(code: selectedRate.rate.code, index: 1)
+
+		recalculateIndexes(baseIndex: selectedRate.rate.index)
+
 		rates.remove(at: indexPath.row)
 		rates.insert(selectedRate, at: 0)
 
 		delegate?.move(at: indexPath, to: IndexPath(row: 0, section: 0))
+
+		var indexes = Array(1..<rates.count)
+		indexes.remove(at: indexPath.row)
+
+		let indexPathsToReload = indexes.map { IndexPath(row: $0, section: 0)  }
+
+		delegate?.setNeedsReload(indexPaths: indexPathsToReload)
+	}
+
+	private func recalculateIndexes(baseIndex: Double) {
+		rates.forEach { model in
+			model.rate = Rate(code: model.rate.code, index: model.rate.index / baseIndex)
+			model.amount = amount
+		}
 	}
 }

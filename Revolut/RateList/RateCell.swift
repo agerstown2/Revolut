@@ -97,9 +97,14 @@ extension RateCell: UITextFieldDelegate {
 	}
 }
 
-struct RateCellViewModel {
-	let rate: Rate
-	let amount: Double
+final class RateCellViewModel {
+	var rate: Rate
+	var amount: Double
+
+	init(rate: Rate, amount: Double) {
+		self.rate = rate
+		self.amount = amount
+	}
 }
 
 protocol RateCellDelegate {
