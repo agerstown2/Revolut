@@ -74,8 +74,9 @@ extension RatesListViewModel: RateCellDelegate {
 
 		delegate?.move(at: indexPath, to: IndexPath(row: 0, section: 0))
 
-		var indexes = Array(1..<rates.count)
+		var indexes = Array(0..<rates.count)
 		indexes.remove(at: indexPath.row)
+		indexes.removeFirst()
 
 		let indexPathsToReload = indexes.map { IndexPath(row: $0, section: 0)  }
 

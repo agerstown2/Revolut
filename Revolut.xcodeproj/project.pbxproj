@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3C27EF161AB8F39C67AF604D /* Pods_RevolutTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F71B25CB24830E526079B5 /* Pods_RevolutTests.framework */; };
 		CB9ADE189D5A793AF29F3FFA /* Pods_Revolut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39B1BBF84C0E3D96F52D255B /* Pods_Revolut.framework */; };
+		F30E228521F2F7E700F3ED75 /* KeyboardOffsetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E228421F2F7E700F3ED75 /* KeyboardOffsetController.swift */; };
 		F32C900521EA3D240071D424 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C900421EA3D240071D424 /* AppDelegate.swift */; };
 		F32C900721EA3D240071D424 /* RatesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C900621EA3D240071D424 /* RatesListViewController.swift */; };
 		F32C900A21EA3D240071D424 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F32C900821EA3D240071D424 /* Main.storyboard */; };
@@ -49,6 +50,7 @@
 		7E75D73B292A3C27571EBF03 /* Pods-RevolutTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RevolutTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RevolutTests/Pods-RevolutTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7F3166848D708F945185B6E4 /* Pods-Revolut.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Revolut.release.xcconfig"; path = "Pods/Target Support Files/Pods-Revolut/Pods-Revolut.release.xcconfig"; sourceTree = "<group>"; };
 		8F6D26BC6D904CFA2888B7E8 /* Pods-RevolutTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RevolutTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RevolutTests/Pods-RevolutTests.release.xcconfig"; sourceTree = "<group>"; };
+		F30E228421F2F7E700F3ED75 /* KeyboardOffsetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardOffsetController.swift; sourceTree = "<group>"; };
 		F32C900121EA3D240071D424 /* Revolut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Revolut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F32C900421EA3D240071D424 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F32C900621EA3D240071D424 /* RatesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesListViewController.swift; sourceTree = "<group>"; };
@@ -141,7 +143,7 @@
 			children = (
 				F32C906121EFB8D80071D424 /* Extensions */,
 				F32C906421EFB9450071D424 /* Loadable */,
-				F32C906C21EFBAB10071D424 /* ErrorManager */,
+				F32C906C21EFBAB10071D424 /* Managers */,
 				F32C904021EBC9B90071D424 /* Networking */,
 				F32C902A21EA4AD40071D424 /* TableViewController */,
 				F32C902521EA41C80071D424 /* RateList */,
@@ -229,12 +231,13 @@
 			path = Loadable;
 			sourceTree = "<group>";
 		};
-		F32C906C21EFBAB10071D424 /* ErrorManager */ = {
+		F32C906C21EFBAB10071D424 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				F32C906D21EFBB800071D424 /* ErrorManager.swift */,
+				F30E228421F2F7E700F3ED75 /* KeyboardOffsetController.swift */,
 			);
-			path = ErrorManager;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -425,6 +428,7 @@
 				F32C900721EA3D240071D424 /* RatesListViewController.swift in Sources */,
 				F32C900521EA3D240071D424 /* AppDelegate.swift in Sources */,
 				F32C904421EBCFB20071D424 /* URLRouter.swift in Sources */,
+				F30E228521F2F7E700F3ED75 /* KeyboardOffsetController.swift in Sources */,
 				F32C903F21EBC6AE0071D424 /* Rate.swift in Sources */,
 				F32C904621EBD07A0071D424 /* NetworkingManager.swift in Sources */,
 				F32C903521EA63530071D424 /* RateCell.swift in Sources */,

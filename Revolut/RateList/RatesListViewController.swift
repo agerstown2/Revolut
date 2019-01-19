@@ -12,6 +12,7 @@ import PureLayout
 final class RatesListViewController: UIViewController, Loadable {
 	private let model = RatesListViewModel()
 	private var tableViewController: TableViewController!
+	private var keyboardOffsetController: KeyboardOffsetController?
 
 	private lazy var errorManager = ErrorManager(
 		view: view,
@@ -35,12 +36,15 @@ final class RatesListViewController: UIViewController, Loadable {
 	}
 
 	private func setupViews() {
+		tableView.contentInset = .create(bottom: 16)
 		tableViewController.register(configurator: RateCell.configurator)
 	}
 
 	private func layoutViews() {
 		view.addSubview(tableView)
-		tableView.autoPinEdgesToSuperviewEdges()
+		tableView.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
+		let bottomConstraint = tableView.autoPinEdge(toSuperviewEdge: .bottom)
+		keyboardOffsetController = KeyboardOffsetController(view: view, constraint: bottomConstraint)
 	}
 
 	private func loadData() {

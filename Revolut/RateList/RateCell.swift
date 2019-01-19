@@ -30,6 +30,7 @@ final class RateCell: UITableViewCell {
 		codeLabel.textColor = UIColor.blue.withAlphaComponent(0.7)
 
 		rateTextField.font = .systemFont(ofSize: 30)
+		rateTextField.keyboardType = .decimalPad
 		rateTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
 		rateTextField.delegate = self
 	}
@@ -98,7 +99,10 @@ extension RateCell: UITextFieldDelegate {
 				textField.text = ""
 			}
 		}
-		return string.isEmpty || textField.text.map { $0.count < 6 } ?? true
+
+		// TODO: посмотреть на дейвайсе можно ли вставить "0pt."
+		let allowedCharacters = CharacterSet(charactersIn: "0123456789.")
+		return string.isEmpty || textField.text.map { $0.count < 6 } ?? true && string.rangeOfCharacter(from: allowedCharacters) != nil
 	}
 
 	func textFieldDidEndEditing(_ textField: UITextField) {
