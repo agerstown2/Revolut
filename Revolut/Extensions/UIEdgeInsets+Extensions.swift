@@ -16,8 +16,4 @@ extension UIEdgeInsets {
 	static func create(vertical: CGFloat = 0, horizontal: CGFloat = 0) -> UIEdgeInsets {
 		return UIEdgeInsets(top: vertical, left: horizontal, bottom: vertical, right: horizontal)
 	}
-
-	static func create(all value: CGFloat) -> UIEdgeInsets {
-		return UIEdgeInsets(top: value, left: value, bottom: value, right: value)
-	}
 }

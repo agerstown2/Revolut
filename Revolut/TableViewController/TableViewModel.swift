@@ -21,8 +21,3 @@ extension TableViewModel {
 		return 1
 	}
 }
-
-protocol TableViewModelDelegate: class {
-	func setNeedsReload(indexPaths: [IndexPath])
-	func move(at: IndexPath, to: IndexPath)
-}

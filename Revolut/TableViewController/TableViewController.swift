@@ -28,17 +28,6 @@ final class TableViewController: NSObject {
 	}
 }
 
-// MARK: - TableViewModelDelegate
-extension TableViewController: TableViewModelDelegate {
-	func setNeedsReload(indexPaths: [IndexPath]) {
-		tableView.reloadRows(at: indexPaths, with: .none)
-	}
-
-	func move(at: IndexPath, to: IndexPath) {
-		tableView.moveRow(at: at, to: to)
-	}
-}
-
 // MARL: - Cell configurators registration
 extension TableViewController {
 	func register<Cell: UITableViewCell, Item, TableModel: TableViewModel>(configurator: CellConfigurator<Cell, Item, TableModel>) {
@@ -93,6 +82,7 @@ extension TableViewController: UITableViewDataSource {
 	}
 }
 
+// MARK: - UITableViewDelegate
 extension TableViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)

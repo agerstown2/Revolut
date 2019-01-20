@@ -43,6 +43,7 @@ final class RatesListViewModel {
 	}
 }
 
+// MARK: - TableViewModel
 extension RatesListViewModel: TableViewModel {
 	func numberOfItemsIn(section: Int) -> Int {
 		return rates.count
@@ -53,6 +54,7 @@ extension RatesListViewModel: TableViewModel {
 	}
 }
 
+// MARK: - RateCellDelegate
 extension RatesListViewModel: RateCellDelegate {
 	func amountChanged(_ amount: Double) {
 		self.amount = amount
@@ -81,6 +83,7 @@ extension RatesListViewModel: RateCellDelegate {
 		let indexPathsToReload = indexes.map { IndexPath(row: $0, section: 0)  }
 
 		delegate?.setNeedsReload(indexPaths: indexPathsToReload)
+		delegate?.scrollToTop()
 	}
 
 	private func recalculateIndexes(baseIndex: Double) {

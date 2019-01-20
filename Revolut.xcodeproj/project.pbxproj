@@ -10,6 +10,8 @@
 		3C27EF161AB8F39C67AF604D /* Pods_RevolutTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F71B25CB24830E526079B5 /* Pods_RevolutTests.framework */; };
 		CB9ADE189D5A793AF29F3FFA /* Pods_Revolut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39B1BBF84C0E3D96F52D255B /* Pods_Revolut.framework */; };
 		F30E228521F2F7E700F3ED75 /* KeyboardOffsetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E228421F2F7E700F3ED75 /* KeyboardOffsetController.swift */; };
+		F30E228721F4FA3900F3ED75 /* TableViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E228621F4FA3900F3ED75 /* TableViewModelDelegate.swift */; };
+		F30E228921F4FA6200F3ED75 /* TableViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E228821F4FA6200F3ED75 /* TableViewController+Delegate.swift */; };
 		F32C900521EA3D240071D424 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C900421EA3D240071D424 /* AppDelegate.swift */; };
 		F32C900721EA3D240071D424 /* RatesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C900621EA3D240071D424 /* RatesListViewController.swift */; };
 		F32C900A21EA3D240071D424 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F32C900821EA3D240071D424 /* Main.storyboard */; };
@@ -51,6 +53,8 @@
 		7F3166848D708F945185B6E4 /* Pods-Revolut.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Revolut.release.xcconfig"; path = "Pods/Target Support Files/Pods-Revolut/Pods-Revolut.release.xcconfig"; sourceTree = "<group>"; };
 		8F6D26BC6D904CFA2888B7E8 /* Pods-RevolutTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RevolutTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RevolutTests/Pods-RevolutTests.release.xcconfig"; sourceTree = "<group>"; };
 		F30E228421F2F7E700F3ED75 /* KeyboardOffsetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardOffsetController.swift; sourceTree = "<group>"; };
+		F30E228621F4FA3900F3ED75 /* TableViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewModelDelegate.swift; sourceTree = "<group>"; };
+		F30E228821F4FA6200F3ED75 /* TableViewController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableViewController+Delegate.swift"; sourceTree = "<group>"; };
 		F32C900121EA3D240071D424 /* Revolut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Revolut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F32C900421EA3D240071D424 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F32C900621EA3D240071D424 /* RatesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesListViewController.swift; sourceTree = "<group>"; };
@@ -190,6 +194,8 @@
 				F32C903621EBBE8A0071D424 /* TableViewController.swift */,
 				F32C903821EBBFE00071D424 /* TableViewModel.swift */,
 				F32C905521ED281A0071D424 /* CellConfigurator.swift */,
+				F30E228621F4FA3900F3ED75 /* TableViewModelDelegate.swift */,
+				F30E228821F4FA6200F3ED75 /* TableViewController+Delegate.swift */,
 			);
 			path = TableViewController;
 			sourceTree = "<group>";
@@ -425,11 +431,13 @@
 				F32C904921EBD25B0071D424 /* RatesURLRouter.swift in Sources */,
 				F32C905621ED281A0071D424 /* CellConfigurator.swift in Sources */,
 				F32C903921EBBFE00071D424 /* TableViewModel.swift in Sources */,
+				F30E228921F4FA6200F3ED75 /* TableViewController+Delegate.swift in Sources */,
 				F32C900721EA3D240071D424 /* RatesListViewController.swift in Sources */,
 				F32C900521EA3D240071D424 /* AppDelegate.swift in Sources */,
 				F32C904421EBCFB20071D424 /* URLRouter.swift in Sources */,
 				F30E228521F2F7E700F3ED75 /* KeyboardOffsetController.swift in Sources */,
 				F32C903F21EBC6AE0071D424 /* Rate.swift in Sources */,
+				F30E228721F4FA3900F3ED75 /* TableViewModelDelegate.swift in Sources */,
 				F32C904621EBD07A0071D424 /* NetworkingManager.swift in Sources */,
 				F32C903521EA63530071D424 /* RateCell.swift in Sources */,
 				F32C902921EA423C0071D424 /* RatesListViewModel.swift in Sources */,

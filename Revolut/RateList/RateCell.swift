@@ -100,9 +100,9 @@ extension RateCell: UITextFieldDelegate {
 			}
 		}
 
-		// TODO: посмотреть на дейвайсе можно ли вставить "0pt."
 		let allowedCharacters = CharacterSet(charactersIn: "0123456789.")
-		return string.isEmpty || textField.text.map { $0.count < 6 } ?? true && string.rangeOfCharacter(from: allowedCharacters) != nil
+		let hasAllowedCharsOnly = allowedCharacters.isSuperset(of: CharacterSet(charactersIn: string))
+		return string.isEmpty || textField.text.map { $0.count < 6 } ?? true && hasAllowedCharsOnly
 	}
 
 	func textFieldDidEndEditing(_ textField: UITextField) {
