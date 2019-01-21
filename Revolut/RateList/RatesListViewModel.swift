@@ -14,6 +14,13 @@ final class RatesListViewModel {
 	var baseRate = Rate(code: "EUR", index: Double(100))
 	var amount: Double = 1
 
+	private weak var timer: Timer?
+	private var lastUpdateTime = Date()
+
+	private var indexPathsExceptFirst: [IndexPath] {
+		return rates.count > 1 ? Array(1..<rates.count).map { IndexPath(row: $0, section: 0) } : []
+	}
+
 	var delegate: TableViewModelDelegate?
 
 	func loadRates(completion: @escaping (_ result: Result) -> ()) {
@@ -30,6 +37,7 @@ final class RatesListViewModel {
 						return rate.map { RateCellViewModel(rate: $0, amount: self.amount) }
 					}
 					self.rates = [baseRate] + convertedRates
+					self.setupTimer()
 					completion(.success)
 				}
 			case .error(let error):
@@ -38,8 +46,29 @@ final class RatesListViewModel {
 		}
 	}
 
+	private func setupTimer() {
+		self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+			let currentTime = Date()
+			if currentTime.timeIntervalSince(self.lastUpdateTime) >= 1 {
+				self.reloadRates()
+				self.lastUpdateTime = currentTime
+			}
+		}
+	}
+
+	private func reloadRates() {
+		loadRates { [weak self] result in
+			guard case .success = result, let self = self else { return }
+			self.delegate?.setNeedsReload(indexPaths: self.indexPathsExceptFirst)
+		}
+	}
+
 	private func updateRates() {
 		rates = rates.map { RateCellViewModel(rate: $0.rate, amount: self.amount) }
+	}
+
+	deinit {
+		timer?.invalidate()
 	}
 }
 
@@ -60,7 +89,7 @@ extension RatesListViewModel: RateCellDelegate {
 		self.amount = amount
 		updateRates()
 		
-		delegate?.setNeedsReload(indexPaths: Array(1..<rates.count).map { IndexPath(row: $0, section: 0) })
+		delegate?.setNeedsReload(indexPaths: indexPathsExceptFirst)
 	}
 
 	func cellSelected(indexPath: IndexPath) {
