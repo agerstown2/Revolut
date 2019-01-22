@@ -11,8 +11,8 @@ import Foundation
 final class RatesListViewModel {
 	private(set) var rates: [RateCellViewModel] = []
 
-	var baseRate = Rate(code: "EUR", index: Double(100))
-	var amount: Double = 1
+	var baseRate = Rate(code: "EUR", doubleIndex: 1)
+	var amount: Double = 100
 
 	private weak var timer: Timer?
 	private var lastUpdateTime = Date()
@@ -23,23 +23,19 @@ final class RatesListViewModel {
 
 	var delegate: TableViewModelDelegate?
 
+	private let ratesSource: RatesLoadable
+
+	init(ratesSource: RatesLoadable = RatesSource()) {
+		self.ratesSource = ratesSource
+	}
+
 	func loadRates(completion: @escaping (_ result: Result) -> ()) {
-		NetworkingManager.shared.request(router: RatesURLRouter(baseCode: baseRate.code)) { response in
-			switch response.jsonData {
-			case .value(let json):
-				let ratesJSON = json["rates"].dictionaryValue
-				if ratesJSON.isEmpty {
-					completion(.error(CustomError(description: "No rates")))
-				} else {
-					let baseRate = RateCellViewModel(rate: self.baseRate, amount: self.amount)
-					let convertedRates: [RateCellViewModel] = ratesJSON.compactMap { rateJSON in
-						let rate = Rate(code: rateJSON.key, index: rateJSON.value)
-						return rate.map { RateCellViewModel(rate: $0, amount: self.amount) }
-					}
-					self.rates = [baseRate] + convertedRates
-					self.setupTimer()
-					completion(.success)
-				}
+		ratesSource.loadRates(baseRate: baseRate, amount: amount) { result in
+			switch result {
+			case .value(let rates):
+				self.rates = rates
+				self.setupTimer()
+				completion(.success)
 			case .error(let error):
 				completion(.error(error))
 			}
@@ -96,7 +92,7 @@ extension RatesListViewModel: RateCellDelegate {
 		let selectedRate = rates[indexPath.row]
 
 		amount = selectedRate.rate.index * amount
-		baseRate = Rate(code: selectedRate.rate.code, index: 1)
+		baseRate = Rate(code: selectedRate.rate.code, doubleIndex: 1)
 
 		recalculateIndexes(baseIndex: selectedRate.rate.index)
 
@@ -117,7 +113,7 @@ extension RatesListViewModel: RateCellDelegate {
 
 	private func recalculateIndexes(baseIndex: Double) {
 		rates.forEach { model in
-			model.rate = Rate(code: model.rate.code, index: model.rate.index / baseIndex)
+			model.rate = Rate(code: model.rate.code, doubleIndex: model.rate.index / baseIndex)
 			model.amount = amount
 		}
 	}

@@ -12,12 +12,14 @@
 		F30E228521F2F7E700F3ED75 /* KeyboardOffsetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E228421F2F7E700F3ED75 /* KeyboardOffsetController.swift */; };
 		F30E228721F4FA3900F3ED75 /* TableViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E228621F4FA3900F3ED75 /* TableViewModelDelegate.swift */; };
 		F30E228921F4FA6200F3ED75 /* TableViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E228821F4FA6200F3ED75 /* TableViewController+Delegate.swift */; };
+		F30E229521F7B94B00F3ED75 /* RateFormattingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E229421F7B94B00F3ED75 /* RateFormattingTests.swift */; };
+		F30E229721F7BACF00F3ED75 /* RatesListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E229621F7BACF00F3ED75 /* RatesListViewModelTests.swift */; };
+		F30E229921F7BC6000F3ED75 /* RatesLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E229821F7BC6000F3ED75 /* RatesLoadable.swift */; };
 		F32C900521EA3D240071D424 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C900421EA3D240071D424 /* AppDelegate.swift */; };
 		F32C900721EA3D240071D424 /* RatesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C900621EA3D240071D424 /* RatesListViewController.swift */; };
 		F32C900A21EA3D240071D424 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F32C900821EA3D240071D424 /* Main.storyboard */; };
 		F32C900C21EA3D250071D424 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F32C900B21EA3D250071D424 /* Assets.xcassets */; };
 		F32C900F21EA3D250071D424 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F32C900D21EA3D250071D424 /* LaunchScreen.storyboard */; };
-		F32C901A21EA3D250071D424 /* RevolutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C901921EA3D250071D424 /* RevolutTests.swift */; };
 		F32C902921EA423C0071D424 /* RatesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C902821EA423C0071D424 /* RatesListViewModel.swift */; };
 		F32C903521EA63530071D424 /* RateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C903421EA63530071D424 /* RateCell.swift */; };
 		F32C903721EBBE8A0071D424 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C903621EBBE8A0071D424 /* TableViewController.swift */; };
@@ -55,6 +57,9 @@
 		F30E228421F2F7E700F3ED75 /* KeyboardOffsetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardOffsetController.swift; sourceTree = "<group>"; };
 		F30E228621F4FA3900F3ED75 /* TableViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewModelDelegate.swift; sourceTree = "<group>"; };
 		F30E228821F4FA6200F3ED75 /* TableViewController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableViewController+Delegate.swift"; sourceTree = "<group>"; };
+		F30E229421F7B94B00F3ED75 /* RateFormattingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateFormattingTests.swift; sourceTree = "<group>"; };
+		F30E229621F7BACF00F3ED75 /* RatesListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesListViewModelTests.swift; sourceTree = "<group>"; };
+		F30E229821F7BC6000F3ED75 /* RatesLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesLoadable.swift; sourceTree = "<group>"; };
 		F32C900121EA3D240071D424 /* Revolut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Revolut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F32C900421EA3D240071D424 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F32C900621EA3D240071D424 /* RatesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesListViewController.swift; sourceTree = "<group>"; };
@@ -63,7 +68,6 @@
 		F32C900E21EA3D250071D424 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F32C901021EA3D250071D424 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F32C901521EA3D250071D424 /* RevolutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RevolutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F32C901921EA3D250071D424 /* RevolutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevolutTests.swift; sourceTree = "<group>"; };
 		F32C901B21EA3D250071D424 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F32C902821EA423C0071D424 /* RatesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesListViewModel.swift; sourceTree = "<group>"; };
 		F32C903421EA63530071D424 /* RateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateCell.swift; sourceTree = "<group>"; };
@@ -162,8 +166,9 @@
 		F32C901821EA3D250071D424 /* RevolutTests */ = {
 			isa = PBXGroup;
 			children = (
-				F32C901921EA3D250071D424 /* RevolutTests.swift */,
 				F32C901B21EA3D250071D424 /* Info.plist */,
+				F30E229421F7B94B00F3ED75 /* RateFormattingTests.swift */,
+				F30E229621F7BACF00F3ED75 /* RatesListViewModelTests.swift */,
 			);
 			path = RevolutTests;
 			sourceTree = "<group>";
@@ -184,6 +189,7 @@
 				F32C902821EA423C0071D424 /* RatesListViewModel.swift */,
 				F32C903421EA63530071D424 /* RateCell.swift */,
 				F32C903E21EBC6AE0071D424 /* Rate.swift */,
+				F30E229821F7BC6000F3ED75 /* RatesLoadable.swift */,
 			);
 			path = RateList;
 			sourceTree = "<group>";
@@ -425,6 +431,7 @@
 			files = (
 				F32C903721EBBE8A0071D424 /* TableViewController.swift in Sources */,
 				F32C904D21EBD9890071D424 /* CustomError.swift in Sources */,
+				F30E229921F7BC6000F3ED75 /* RatesLoadable.swift in Sources */,
 				F32C906E21EFBB800071D424 /* ErrorManager.swift in Sources */,
 				F32C906321EFB8F10071D424 /* UIEdgeInsets+Extensions.swift in Sources */,
 				F32C907021EFD1940071D424 /* Double+Rate.swift in Sources */,
@@ -450,7 +457,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F32C901A21EA3D250071D424 /* RevolutTests.swift in Sources */,
+				F30E229721F7BACF00F3ED75 /* RatesListViewModelTests.swift in Sources */,
+				F30E229521F7B94B00F3ED75 /* RateFormattingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

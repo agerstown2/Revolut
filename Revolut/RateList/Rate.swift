@@ -8,7 +8,7 @@
 
 import SwiftyJSON
 
-struct Rate {
+struct Rate: Equatable {
 	let code: String
 	let index: Double
 	
@@ -18,8 +18,8 @@ struct Rate {
 		self.index = index
 	}
 
-	init(code: String, index: Double) {
+	init(code: String, doubleIndex: Double) {
 		self.code = code
-		self.index = index
+		self.index = doubleIndex
 	}
 }

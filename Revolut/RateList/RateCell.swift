@@ -120,6 +120,12 @@ final class RateCellViewModel {
 	}
 }
 
+extension RateCellViewModel: Equatable {
+	static func == (lhs: RateCellViewModel, rhs: RateCellViewModel) -> Bool {
+		return lhs.rate == rhs.rate && lhs.amount == rhs.amount
+	}
+}
+
 protocol RateCellDelegate {
 	func amountChanged(_ amount: Double)
 	func cellSelected(indexPath: IndexPath)
