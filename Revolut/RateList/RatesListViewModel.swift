@@ -11,7 +11,7 @@ import Foundation
 final class RatesListViewModel {
 	private(set) var rates: [RateCellViewModel] = []
 
-	var baseRate = Rate(code: "EUR", doubleIndex: 1)
+	var baseRate = Rate(code: "EUR", index: 1)
 	var amount: Double = 100
 
 	private weak var timer: Timer?
@@ -21,7 +21,7 @@ final class RatesListViewModel {
 		return rates.count > 1 ? Array(1..<rates.count).map { IndexPath(row: $0, section: 0) } : []
 	}
 
-	var delegate: TableViewModelDelegate?
+	weak var delegate: TableViewModelDelegate?
 
 	private let ratesSource: RatesLoadable
 
@@ -92,7 +92,7 @@ extension RatesListViewModel: RateCellDelegate {
 		let selectedRate = rates[indexPath.row]
 
 		amount = selectedRate.rate.index * amount
-		baseRate = Rate(code: selectedRate.rate.code, doubleIndex: 1)
+		baseRate = Rate(code: selectedRate.rate.code, index: 1)
 
 		recalculateIndexes(baseIndex: selectedRate.rate.index)
 
@@ -113,7 +113,7 @@ extension RatesListViewModel: RateCellDelegate {
 
 	private func recalculateIndexes(baseIndex: Double) {
 		rates.forEach { model in
-			model.rate = Rate(code: model.rate.code, doubleIndex: model.rate.index / baseIndex)
+			model.rate = Rate(code: model.rate.code, index: model.rate.index / baseIndex)
 			model.amount = amount
 		}
 	}

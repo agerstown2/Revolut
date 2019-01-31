@@ -7,30 +7,32 @@
 //
 
 import Alamofire
-import SwiftyJSON
 
 final class NetworkingManager {
 
 	static let shared = NetworkingManager()
 
-	func request(router: URLRouter, completion: @escaping (_ response: DataResponse<Any>) -> Void) {
-		Alamofire.request(
-			router,
+	func request(router: URLRouter, completion: @escaping (_ response: DataResponse<Data>) -> Void) {
+		Alamofire.request(router,
 			method: router.method,
 			parameters: router.args,
 			encoding: URLEncoding.default,
 			headers: router.headers
 		)
-		.responseJSON(completionHandler: completion)
+		.responseData(completionHandler: completion)
 	}
 }
 
 extension DataResponse {
-	var jsonData: ValueResult<JSON> {
-		if let value = result.value {
-			return .value(JSON(value))
-		} else {
+	func decode<T: Decodable>() -> ValueResult<T> {
+		guard let data = data else {
 			return .error(result.error ?? CustomError(description: "Undefined error"))
 		}
+
+		guard let jsonData = try? JSONDecoder().decode(T.self, from: data) else {
+			return .error(CustomError(description: "Unable to parse json data"))
+		}
+
+		return .value(jsonData)
 	}
 }
