@@ -1,24 +1,20 @@
 PODS:
   - Alamofire (4.8.0)
-  - PureLayout (3.1.4)
   - SwiftLint (0.29.3)
 
 DEPENDENCIES:
   - Alamofire
-  - PureLayout
   - SwiftLint
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
-    - PureLayout
     - SwiftLint
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
-  PureLayout: f08c01b8dec00bb14a1fefa3de4c7d9c265df85e
   SwiftLint: bfa7ca7b4d170cfaf0d236ca3ffd969e88a2f002
 
-PODFILE CHECKSUM: d34050181e20fd8eca48aa413533b2d7e8e0f784
+PODFILE CHECKSUM: c40dbd6dcceafcf18ea63882d355d6d2045209c4
 
 COCOAPODS: 1.5.3

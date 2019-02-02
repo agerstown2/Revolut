@@ -42,7 +42,7 @@ final class RateCell: UITableViewCell {
 
 		contentView.addSubview(rateTextField)
 		rateTextField.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
-		rateTextField.autoPinEdge(toSuperviewEdge: .top, withInset: 16)
+		rateTextField.autoPinEdge(toSuperviewEdge: .top, withInset: 8)
 		rateTextField.autoPinEdge(.leading, to: .trailing, of: codeLabel, withOffset: 16, relation: .greaterThanOrEqual)
 
 		let underlineView = UIView()
@@ -51,9 +51,9 @@ final class RateCell: UITableViewCell {
 		underlineView.autoSetDimension(.height, toSize: underlineHeight)
 		underlineView.layer.cornerRadius = underlineHeight / 2
 		contentView.addSubview(underlineView)
-		underlineView.autoMatch(.width, to: .width, of: rateTextField, withOffset: 8)
+		underlineView.autoMatch(.width, of: rateTextField, withOffset: 8)
 		underlineView.autoAlignAxis(.vertical, toSameAxisOf: rateTextField)
-		underlineView.autoPinEdge(toSuperviewEdge: .bottom)
+		underlineView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 8)
 		underlineView.autoPinEdge(.top, to: .bottom, of: rateTextField, withOffset: 4)
 	}
 

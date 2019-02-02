@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PureLayout
 
 final class RatesListViewController: UIViewController, Loadable {
 	private let model = RatesListViewModel()

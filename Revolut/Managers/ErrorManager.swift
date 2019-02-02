@@ -49,6 +49,7 @@ final class ErrorView: UIView {
 	private func setupViews() {
 		messageLabel.numberOfLines = 0
 		messageLabel.font = .systemFont(ofSize: 20)
+		messageLabel.textAlignment = .center
 
 		retryButton.backgroundColor = UIColor.blue.withAlphaComponent(0.3)
 
@@ -72,8 +73,8 @@ final class ErrorView: UIView {
 
 		addSubview(stackView)
 		stackView.autoCenterInSuperview()
-		stackView.autoPinEdge(toSuperviewEdge: .leading, withInset: 24, relation: .greaterThanOrEqual)
-		stackView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 24, relation: .greaterThanOrEqual)
+		stackView.autoPinEdge(toSuperviewEdge: .leading, withInset: 24)
+		stackView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 24)
 
 		retryButton.autoSetDimension(.height, toSize: retryButtonHeight)
 	}

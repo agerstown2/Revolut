@@ -15,6 +15,7 @@
 		F30E229521F7B94B00F3ED75 /* RateFormattingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E229421F7B94B00F3ED75 /* RateFormattingTests.swift */; };
 		F30E229721F7BACF00F3ED75 /* RatesListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E229621F7BACF00F3ED75 /* RatesListViewModelTests.swift */; };
 		F30E229921F7BC6000F3ED75 /* RatesLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E229821F7BC6000F3ED75 /* RatesLoadable.swift */; };
+		F3189E7B2205FC7E00A07A8D /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3189E7A2205FC7E00A07A8D /* UIView+Constraints.swift */; };
 		F32C900521EA3D240071D424 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C900421EA3D240071D424 /* AppDelegate.swift */; };
 		F32C900721EA3D240071D424 /* RatesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C900621EA3D240071D424 /* RatesListViewController.swift */; };
 		F32C900A21EA3D240071D424 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F32C900821EA3D240071D424 /* Main.storyboard */; };
@@ -60,6 +61,7 @@
 		F30E229421F7B94B00F3ED75 /* RateFormattingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateFormattingTests.swift; sourceTree = "<group>"; };
 		F30E229621F7BACF00F3ED75 /* RatesListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesListViewModelTests.swift; sourceTree = "<group>"; };
 		F30E229821F7BC6000F3ED75 /* RatesLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesLoadable.swift; sourceTree = "<group>"; };
+		F3189E7A2205FC7E00A07A8D /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		F32C900121EA3D240071D424 /* Revolut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Revolut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F32C900421EA3D240071D424 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F32C900621EA3D240071D424 /* RatesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesListViewController.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 			children = (
 				F32C906221EFB8F10071D424 /* UIEdgeInsets+Extensions.swift */,
 				F32C906F21EFD1940071D424 /* Double+Rate.swift */,
+				F3189E7A2205FC7E00A07A8D /* UIView+Constraints.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -406,14 +409,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Revolut/Pods-Revolut-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -436,6 +437,7 @@
 				F32C904921EBD25B0071D424 /* RatesURLRouter.swift in Sources */,
 				F32C905621ED281A0071D424 /* CellConfigurator.swift in Sources */,
 				F32C903921EBBFE00071D424 /* TableViewModel.swift in Sources */,
+				F3189E7B2205FC7E00A07A8D /* UIView+Constraints.swift in Sources */,
 				F30E228921F4FA6200F3ED75 /* TableViewController+Delegate.swift in Sources */,
 				F32C900721EA3D240071D424 /* RatesListViewController.swift in Sources */,
 				F32C900521EA3D240071D424 /* AppDelegate.swift in Sources */,

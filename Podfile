@@ -1,7 +1,6 @@
 use_frameworks!
 
 target 'Revolut' do
-  pod 'PureLayout'
   pod 'Alamofire'
   pod 'SwiftLint'
 
