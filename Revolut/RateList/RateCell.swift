@@ -90,14 +90,14 @@ extension RateCell {
 // MARK: - UITextFieldDelegate
 extension RateCell: UITextFieldDelegate {
 	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-		if let text = textField.text {
-			if text == "0" && string == "0" {
-				return false
-			}
-
-			if text == "0" && string != "0" {
-				textField.text = ""
-			}
+		switch RateInputValidator.validate(existingText: textField.text ?? "", replacementString: string) {
+		case .invalid:
+			return false
+		case .valid: ()
+		case .needsTextUpdate(let text):
+			textField.text = text
+			delegate?.amountChanged(text.map { Double($0) ?? 0 } ?? 0)
+			return false
 		}
 
 		let allowedCharacters = CharacterSet(charactersIn: "0123456789.")
