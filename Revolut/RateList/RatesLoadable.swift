@@ -11,8 +11,10 @@ protocol RatesLoadable {
 }
 
 final class RatesSource: RatesLoadable {
+	private let networkingManager = NetworkingManager()
+
 	func loadRates(baseRate: Rate, amount: Double, completion: @escaping (_ result: ValueResult<[RateCellViewModel]>) -> ()) {
-		NetworkingManager.shared.request(router: RatesURLRouter(baseCode: baseRate.code)) { response in
+		networkingManager.request(router: RatesURLRouter(baseCode: baseRate.code)) { response in
 			let result: ValueResult<RatesData> = response.decode()
 			switch result {
 			case .value(let ratesData):

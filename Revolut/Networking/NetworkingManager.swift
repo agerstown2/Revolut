@@ -9,9 +9,6 @@
 import Alamofire
 
 final class NetworkingManager {
-
-	static let shared = NetworkingManager()
-
 	func request(router: URLRouter, completion: @escaping (_ response: DataResponse<Data>) -> Void) {
 		Alamofire.request(router,
 			method: router.method,
