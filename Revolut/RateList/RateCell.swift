@@ -85,9 +85,12 @@ extension RateCell {
 
 // MARK: - UITextViewDelegate
 extension RateCell: UITextViewDelegate {
+	private func doubleAmount(text: String) -> Double {
+		return Double(text.replacingOccurrences(of: ",", with: ".")) ?? 0
+	}
+
 	func textViewDidChange(_ textView: UITextView) {
-		let amount = rateTextView.text.map { Double($0) ?? 0 } ?? 0
-		delegate?.amountChanged(amount)
+		delegate?.amountChanged(doubleAmount(text: textView.text))
 	}
 
 	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -97,11 +100,11 @@ extension RateCell: UITextViewDelegate {
 		case .valid: ()
 		case .needsTextUpdate(let text):
 			textView.text = text
-			delegate?.amountChanged(text.map { Double($0) ?? 0 } ?? 0)
+			delegate?.amountChanged(doubleAmount(text: text ?? ""))
 			return false
 		}
 
-		let allowedCharacters = CharacterSet(charactersIn: "0123456789.")
+		let allowedCharacters = CharacterSet(charactersIn: "0123456789.,")
 		return text.isEmpty || allowedCharacters.isSuperset(of: CharacterSet(charactersIn: text))
 	}
 

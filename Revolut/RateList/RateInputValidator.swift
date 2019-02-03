@@ -20,13 +20,13 @@ final class RateInputValidator {
 		}
 
 		// check for first dot
-		if existingText.isEmpty && string == "." {
-			return .needsTextUpdate(text: "0.")
+		if existingText.isEmpty && (string == "." || string == ",") {
+			return .needsTextUpdate(text: "0\(string)")
 		}
 
 		// check for multiple dots
-		let existingDotsNumber = existingText.contains(".") ? 1 : 0
-		let addedDotsNumber = string.filter({ $0 == "." }).count
+		let existingDotsNumber = existingText.contains(".") || existingText.contains(",") ? 1 : 0
+		let addedDotsNumber = string.filter({ $0 == "." || $0 == "," }).count
 		if existingDotsNumber + addedDotsNumber > 1 {
 			return .invalid
 		}
