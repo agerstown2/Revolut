@@ -10,7 +10,7 @@ import UIKit
 
 final class RateCell: UITableViewCell {
 	private let codeLabel = UILabel()
-	private let rateTextField = UITextField()
+	private let rateTextView = UITextView()
 
 	var delegate: RateCellDelegate?
 
@@ -28,11 +28,12 @@ final class RateCell: UITableViewCell {
 	private func setupViews() {
 		codeLabel.font = .systemFont(ofSize: 24)
 		codeLabel.textColor = UIColor.blue.withAlphaComponent(0.7)
+		codeLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
 
-		rateTextField.font = .systemFont(ofSize: 30)
-		rateTextField.keyboardType = .decimalPad
-		rateTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-		rateTextField.delegate = self
+		rateTextView.font = .systemFont(ofSize: 30)
+		rateTextView.keyboardType = .decimalPad
+		rateTextView.isScrollEnabled = false
+		rateTextView.delegate = self
 	}
 
 	private func layoutViews() {
@@ -40,10 +41,10 @@ final class RateCell: UITableViewCell {
 		codeLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
 		codeLabel.autoAlignAxis(toSuperviewAxis: .horizontal)
 
-		contentView.addSubview(rateTextField)
-		rateTextField.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
-		rateTextField.autoPinEdge(toSuperviewEdge: .top, withInset: 8)
-		rateTextField.autoPinEdge(.leading, to: .trailing, of: codeLabel, withOffset: 16, relation: .greaterThanOrEqual)
+		contentView.addSubview(rateTextView)
+		rateTextView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
+		rateTextView.autoPinEdge(toSuperviewEdge: .top, withInset: 8)
+		rateTextView.autoPinEdge(.leading, to: .trailing, of: codeLabel, withOffset: 16, relation: .greaterThanOrEqual)
 
 		let underlineView = UIView()
 		underlineView.backgroundColor = UIColor.gray.withAlphaComponent(0.3)
@@ -51,21 +52,16 @@ final class RateCell: UITableViewCell {
 		underlineView.autoSetDimension(.height, toSize: underlineHeight)
 		underlineView.layer.cornerRadius = underlineHeight / 2
 		contentView.addSubview(underlineView)
-		underlineView.autoMatch(.width, of: rateTextField, withOffset: 8)
-		underlineView.autoAlignAxis(.vertical, toSameAxisOf: rateTextField)
+		underlineView.autoMatch(.width, of: rateTextView, withOffset: 8)
+		underlineView.autoAlignAxis(.vertical, toSameAxisOf: rateTextView)
 		underlineView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 8)
-		underlineView.autoPinEdge(.top, to: .bottom, of: rateTextField, withOffset: 4)
+		underlineView.autoPinEdge(.top, to: .bottom, of: rateTextView, withOffset: 4)
 	}
 
 	private func configure(model: RateCellViewModel) {
 		codeLabel.text = model.rate.code
 		let value = model.rate.index * model.amount
-		rateTextField.text = value.rateFormatted()
-	}
-
-	@objc private func textFieldDidChange() {
-		let amount = rateTextField.text.map { Double($0) ?? 0 } ?? 0
-		delegate?.amountChanged(amount)
+		rateTextView.text = value.rateFormatted()
 	}
 }
 
@@ -75,38 +71,42 @@ extension RateCell {
 		return CellConfigurator(
 			configureCell: { cell, model, tableViewModel in
 				cell.configure(model: model)
-				cell.rateTextField.isUserInteractionEnabled = false
+				cell.rateTextView.isUserInteractionEnabled = false
 				cell.delegate = tableViewModel
 			},
 			didSelect: { cell, indexPath in
-				cell.rateTextField.isUserInteractionEnabled = true
-				cell.rateTextField.becomeFirstResponder()
+				cell.rateTextView.isUserInteractionEnabled = true
+				cell.rateTextView.becomeFirstResponder()
 				cell.delegate?.cellSelected(indexPath: indexPath)
 			}
 		)
 	}
 }
 
-// MARK: - UITextFieldDelegate
-extension RateCell: UITextFieldDelegate {
-	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-		switch RateInputValidator.validate(existingText: textField.text ?? "", replacementString: string) {
+// MARK: - UITextViewDelegate
+extension RateCell: UITextViewDelegate {
+	func textViewDidChange(_ textView: UITextView) {
+		let amount = rateTextView.text.map { Double($0) ?? 0 } ?? 0
+		delegate?.amountChanged(amount)
+	}
+
+	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+		switch RateInputValidator.validate(existingText: textView.text, replacementString: text) {
 		case .invalid:
 			return false
 		case .valid: ()
 		case .needsTextUpdate(let text):
-			textField.text = text
+			textView.text = text
 			delegate?.amountChanged(text.map { Double($0) ?? 0 } ?? 0)
 			return false
 		}
 
 		let allowedCharacters = CharacterSet(charactersIn: "0123456789.")
-		let hasAllowedCharsOnly = allowedCharacters.isSuperset(of: CharacterSet(charactersIn: string))
-		return string.isEmpty || textField.text.map { $0.count < 6 } ?? true && hasAllowedCharsOnly
+		return text.isEmpty || allowedCharacters.isSuperset(of: CharacterSet(charactersIn: text))
 	}
 
-	func textFieldDidEndEditing(_ textField: UITextField) {
-		textField.isUserInteractionEnabled = false
+	func textViewDidEndEditing(_ textView: UITextView) {
+		textView.isUserInteractionEnabled = false
 	}
 }
 
