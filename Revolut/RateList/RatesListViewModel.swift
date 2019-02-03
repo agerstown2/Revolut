@@ -55,12 +55,16 @@ final class RatesListViewModel {
 	private func reloadRates() {
 		loadRates { [weak self] result in
 			guard case .success = result, let self = self else { return }
-			self.delegate?.setNeedsReload(indexPaths: self.indexPathsExceptFirst)
+			self.reload(indexPaths: self.indexPathsExceptFirst)
 		}
 	}
 
 	private func updateRates() {
 		rates = rates.map { RateCellViewModel(rate: $0.rate, amount: self.amount) }
+	}
+
+	private func reload(indexPaths: [IndexPath]) {
+		delegate?.setNeedsReload(indexPaths: indexPaths, animated: false, visibleOnly: true)
 	}
 
 	deinit {
@@ -84,8 +88,8 @@ extension RatesListViewModel: RateCellDelegate {
 	func amountChanged(_ amount: Double) {
 		self.amount = amount
 		updateRates()
-		
-		delegate?.setNeedsReload(indexPaths: indexPathsExceptFirst)
+
+		reload(indexPaths: indexPathsExceptFirst)
 	}
 
 	func cellSelected(indexPath: IndexPath) {
@@ -107,7 +111,7 @@ extension RatesListViewModel: RateCellDelegate {
 
 		let indexPathsToReload = indexes.map { IndexPath(row: $0, section: 0)  }
 
-		delegate?.setNeedsReload(indexPaths: indexPathsToReload)
+		reload(indexPaths: indexPathsToReload)
 		delegate?.scrollToTop()
 	}
 

@@ -9,7 +9,7 @@
 import Foundation
 
 protocol TableViewModelDelegate: class {
-	func setNeedsReload(indexPaths: [IndexPath])
+	func setNeedsReload(indexPaths: [IndexPath], animated: Bool, visibleOnly: Bool)
 	func move(at: IndexPath, to: IndexPath)
 	func scrollToTop()
 }
