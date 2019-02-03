@@ -37,6 +37,9 @@ final class RatesListViewController: UIViewController, Loadable {
 	private func setupViews() {
 		tableView.contentInset = .create(bottom: 16)
 		tableViewController.register(configurator: RateCell.configurator)
+
+		let tap = UITapGestureRecognizer(target: self, action: #selector(handleNavigationBarTap))
+		navigationController?.navigationBar.addGestureRecognizer(tap)
 	}
 
 	private func layoutViews() {
@@ -58,5 +61,9 @@ final class RatesListViewController: UIViewController, Loadable {
 				self.errorManager.showError()
 			}
 		}
+	}
+
+	@objc private func handleNavigationBarTap() {
+		view.endEditing(true)
 	}
 }
