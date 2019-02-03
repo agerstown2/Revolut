@@ -6,6 +6,8 @@
 //  Copyright © 2019 Natalia Nikitina. All rights reserved.
 //
 
+import Foundation
+
 final class RateInputValidator {
 	static func validate(existingText: String, replacementString string: String) -> ValidationResult {
 		// check for multiple zeros
@@ -31,10 +33,16 @@ final class RateInputValidator {
 			return .invalid
 		}
 
+		// check for allowed characters
+		let allowedCharacters = CharacterSet(charactersIn: "0123456789.,")
+		if !string.isEmpty && !allowedCharacters.isSuperset(of: CharacterSet(charactersIn: string)) {
+			return .invalid
+		}
+
 		return .valid
 	}
 
-	enum ValidationResult {
+	enum ValidationResult: Equatable {
 		case invalid
 		case valid
 		case needsTextUpdate(text: String?)

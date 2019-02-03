@@ -14,7 +14,7 @@ class RatesListViewModelTests: XCTestCase {
     func testInitialValues() {
         let model = RatesListViewModel()
 		XCTAssertEqual(model.amount, 100)
-		XCTAssertEqual(model.baseRate, Rate(code: "EUR", doubleIndex: 1))
+		XCTAssertEqual(model.baseRate, Rate(code: "EUR", index: 1))
     }
 
 	func testLoadEmptyRates() {
@@ -27,8 +27,8 @@ class RatesListViewModelTests: XCTestCase {
 
 	func testLoadSomeRates() {
 		let rates = [
-			RateCellViewModel(rate: Rate(code: "EUR", doubleIndex: 2), amount: 10),
-			RateCellViewModel(rate: Rate(code: "RUB", doubleIndex: 5), amount: 10)
+			RateCellViewModel(rate: Rate(code: "EUR", index: 2), amount: 10),
+			RateCellViewModel(rate: Rate(code: "RUB", index: 5), amount: 10)
 		]
 		let model = RatesListViewModel(ratesSource: MockRatesSource(result: .value(rates)))
 		model.loadRates { result in

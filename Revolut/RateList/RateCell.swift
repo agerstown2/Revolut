@@ -97,15 +97,13 @@ extension RateCell: UITextViewDelegate {
 		switch RateInputValidator.validate(existingText: textView.text, replacementString: text) {
 		case .invalid:
 			return false
-		case .valid: ()
+		case .valid:
+			return true
 		case .needsTextUpdate(let text):
 			textView.text = text
 			delegate?.amountChanged(doubleAmount(text: text ?? ""))
 			return false
 		}
-
-		let allowedCharacters = CharacterSet(charactersIn: "0123456789.,")
-		return text.isEmpty || allowedCharacters.isSuperset(of: CharacterSet(charactersIn: text))
 	}
 
 	func textViewDidEndEditing(_ textView: UITextView) {
